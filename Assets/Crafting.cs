@@ -1,65 +1,106 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Crafting : MonoBehaviour
 {
-    [SerializeField] float SatchelTimer = 4;
-    [SerializeField] float BandageTimer = 4;
-    [SerializeField] GameObject Player;
-    float SatchelCop;
-    float BandageCop;
-    // Start is called before the first frame update
+    [SerializeField] private float satchelTimer = 4;
+    [SerializeField] private float bandageTimer = 4;
+    [SerializeField] private Inventory inventory;
+
+    
+    [SerializeField] Image bandageImage;
+    [SerializeField] Image satchelImage;
+    [SerializeField] Image matragunaImage;
+
+    private float satchelCop;
+    private float bandageCop;
+
     void Start()
     {
-        SatchelCop = SatchelTimer;
-        BandageCop = BandageTimer;
+        satchelCop = satchelTimer;
+        bandageCop = bandageTimer;
     }
 
-    // Update is called once per frame
     void Update()
     {
         CraftSatchel();
-
+        CraftBandage();
     }
+
     void CraftSatchel() 
     {
-        if (Player.GetComponent<Inventory>().MatragunaCounter > 0)
+        if (inventory.matragunaCounter > 0 )
         {
-            if (Input.GetKey(KeyCode.E))
+            if (Input.GetKey(KeyCode.E) && bandageTimer == bandageCop)
             {
-                SatchelTimer -= 1 * Time.deltaTime;
+                satchelTimer -= 1 * Time.deltaTime;
+                satchelImage.fillAmount = 1 - satchelTimer/satchelCop;
+
+                matragunaImage.fillAmount = satchelTimer/satchelCop;
             }
-            if (Input.GetKeyUp(KeyCode.E))
+            if (Input.GetKeyUp(KeyCode.E) && bandageTimer == bandageCop)
             {
-                SatchelTimer = SatchelCop;
+                if(satchelTimer >=  (satchelCop - 0.1f))
+                {
+                    inventory.UseSatchel();
+                }
+                satchelImage.fillAmount = 1;
+                matragunaImage.fillAmount = 1;
+
+                satchelTimer = satchelCop;
+
+                inventory.UpdateText();
             }
-            if (SatchelTimer <= 0)
+            if (satchelTimer <= 0 && bandageTimer == bandageCop)
             {
-                Player.GetComponent<Inventory>().SatchelCounter += 1;
-                Player.GetComponent<Inventory>().MatragunaCounter -= 1;
-                SatchelTimer = SatchelCop;
+                inventory.satchelCounter += 1;
+                inventory.matragunaCounter -= 1;
+                satchelTimer = satchelCop;
+
+                matragunaImage.fillAmount = 1;
+
+                inventory.UpdateText();
             }
         }
     }
+
     void CraftBandage()
     {
-        if (Player.GetComponent<Inventory>().MatragunaCounter > 0)
+        if (inventory.matragunaCounter > 0 )
         {
-            if (Input.GetKey(KeyCode.E))
+            if (Input.GetKey(KeyCode.Q) && satchelTimer == satchelCop)
             {
-                BandageTimer -= 1 * Time.deltaTime;
+                bandageTimer -= 1 * Time.deltaTime;
+                bandageImage.fillAmount = 1 - bandageTimer/bandageCop;
+
+                matragunaImage.fillAmount = bandageTimer/bandageCop;
             }
-            if (Input.GetKeyUp(KeyCode.E))
+            if (Input.GetKeyUp(KeyCode.Q) && satchelTimer == satchelCop)
             {
-                BandageTimer = BandageCop;
+                if(bandageTimer >= (bandageCop - 0.1f))
+                {
+                    inventory.UseBandage();
+                }
+                bandageImage.fillAmount = 1;
+                matragunaImage.fillAmount = 1;
+
+                bandageTimer = bandageCop;
+
+                inventory.UpdateText();
             }
-            if (SatchelTimer <= 0)
+            if (bandageTimer <= 0 && satchelTimer == satchelCop)
             {
-                Player.GetComponent<Inventory>().BandageCounter += 1;
-                Player.GetComponent<Inventory>().MatragunaCounter -= 1;
-                BandageTimer = BandageCop;
+                inventory.bandageCounter += 1;
+                inventory.matragunaCounter -= 1;
+                bandageTimer = bandageCop;
+
+                matragunaImage.fillAmount = 1;
+
+                inventory.UpdateText();
             }
         }
     }
+    
 }

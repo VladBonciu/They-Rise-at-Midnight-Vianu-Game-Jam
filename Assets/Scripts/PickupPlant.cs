@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class PickupPlant : MonoBehaviour
 {
-    [SerializeField] GameObject Player;
+    public Inventory inventory;
+
+    void Awake()
+    {
+        inventory = FindObjectOfType<Inventory>();
+    }
     
     public void PickedUp() 
     {
         //pickup the matraguna
-    Destroy(gameObject);
-        Player.GetComponent<Inventory>().MatragunaCounter += 1;  
+        Destroy(gameObject);
+        inventory.matragunaCounter += 1;  
+        inventory.UpdateText();
     }
 
   
