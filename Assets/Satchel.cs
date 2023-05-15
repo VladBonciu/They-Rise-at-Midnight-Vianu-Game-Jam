@@ -10,7 +10,7 @@ public class Satchel : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        rb.AddForce(transform.forward * 20f , ForceMode.Impulse);
+        rb.AddForce(transform.forward * 25f , ForceMode.Impulse);
     }
 
     void OnCollisionEnter(Collision col)
