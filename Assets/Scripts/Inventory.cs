@@ -14,6 +14,9 @@ public class Inventory : MonoBehaviour
     [SerializeField] TMP_Text bandageText;
     [SerializeField] TMP_Text satchelText;
 
+
+    [SerializeField] SatchelThrower thrower;
+
     void Start()
     {
         UpdateText();
@@ -41,6 +44,8 @@ public class Inventory : MonoBehaviour
     {
         if(satchelCounter > 0)
         {
+            thrower.Shoot();
+
             Debug.Log("Satcheled");
             satchelCounter--;
 

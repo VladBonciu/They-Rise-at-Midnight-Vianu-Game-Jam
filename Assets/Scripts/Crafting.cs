@@ -42,7 +42,7 @@ public class Crafting : MonoBehaviour
             }
             if (Input.GetKeyUp(KeyCode.E) && bandageTimer == bandageCop)
             {
-                if(satchelTimer >=  (satchelCop - 0.1f))
+                if(satchelTimer >=  (satchelCop - 0.2f))
                 {
                     inventory.UseSatchel();
                 }
@@ -79,7 +79,7 @@ public class Crafting : MonoBehaviour
             }
             if (Input.GetKeyUp(KeyCode.Q) && satchelTimer == satchelCop)
             {
-                if(bandageTimer >= (bandageCop - 0.1f))
+                if(bandageTimer >= (bandageCop - 0.2f))
                 {
                     inventory.UseBandage();
                 }
