@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class PlayerMove : MonoBehaviour
 {       
@@ -16,11 +17,12 @@ public class PlayerMove : MonoBehaviour
     public float airMultiplier;
     bool readyToJump;
 
-    [HideInInspector] public float walkSpeed;
-    [HideInInspector] public float sprintSpeed;
+    [SerializeField] private float walkSpeed;
+    [SerializeField] private float sprintSpeed;
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
+    public KeyCode sprintKey = KeyCode.Space;
 
     [Header("Ground Check")]
     public float playerHeight;
@@ -37,6 +39,9 @@ public class PlayerMove : MonoBehaviour
     Rigidbody rb;
 
     public bool canMove;
+
+    public CinemachineVirtualCamera cinemachineVirtualCamera;
+    public CinemachineBasicMultiChannelPerlin a;
 
     private void Start()
     {
@@ -88,6 +93,26 @@ public class PlayerMove : MonoBehaviour
 
             Invoke(nameof(ResetJump), jumpCooldown);
         }
+
+        if(moveDirection != Vector3.zero)
+        {
+            if(Input.GetKey(sprintKey))
+            {
+                moveSpeed = Mathf.Lerp(moveSpeed, sprintSpeed, Time.deltaTime * .2f);
+            }
+            else
+            {
+                moveSpeed = Mathf.Lerp(moveSpeed, walkSpeed, Time.deltaTime * 1f);
+            }
+
+            cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = moveSpeed / walkSpeed * moveSpeed / walkSpeed;
+        }
+        else
+        {
+            cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0.5f;
+        }
+
+        
     }
 
     private void MovePlayer()
