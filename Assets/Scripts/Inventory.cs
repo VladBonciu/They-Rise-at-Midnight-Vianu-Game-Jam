@@ -9,6 +9,7 @@ public class Inventory : MonoBehaviour
     public float matragunaCounter = 0;
     public float bandageCounter = 0;
     public float satchelCounter = 0;
+    [SerializeField] float heal = 10;
 
     [SerializeField] TMP_Text matragunaText;
     [SerializeField] TMP_Text bandageText;
@@ -34,7 +35,7 @@ public class Inventory : MonoBehaviour
         {
             Debug.Log("Bandaged");
             bandageCounter--;
-
+            GetComponent<Health>().health += heal;
             UpdateText();
         }
         

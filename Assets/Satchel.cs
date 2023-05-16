@@ -18,6 +18,7 @@ public class Satchel : MonoBehaviour
         if(col.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             Debug.Log("Hit Enemy");
+            col.gameObject.GetComponent<Enemy>().hit = true;
         }
 
         Debug.Log("Hit");
