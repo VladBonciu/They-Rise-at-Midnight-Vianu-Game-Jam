@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +14,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool isUsingBinoculars;
     [SerializeField] private bool isUsingNotebook;
 
+    [SerializeField] private TMP_Text[] matriceDeVizitare;
+
 
     void Start()
     {
@@ -20,6 +24,11 @@ public class GameManager : MonoBehaviour
         Toolkit.SetActive(false);
         isUsingNotebook = false;
         isUsingBinoculars = false;
+
+        foreach(TMP_Text text in matriceDeVizitare)
+        {
+            text.text = "o";
+        }
     }
 
     // Update is called once per frame
@@ -73,6 +82,26 @@ public class GameManager : MonoBehaviour
         }
         Toolkit.SetActive(false);
         isToolkitOpen = false;
+    }
+
+    public void CompleteLocation(int index)
+    {
+        matriceDeVizitare[index].text = "x";
+
+        int ok = 1;
+
+        for (int i = 0; i < 3; i++)
+        {
+            if(matriceDeVizitare[i].text != matriceDeVizitare[i].text && matriceDeVizitare[i].text != "x")
+            {
+                ok = 0;
+            }
+        }
+
+        if(ok == 1)
+        {
+            Debug.Log("You Win!!!");
+        }
     }
     
 }

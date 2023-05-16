@@ -1,27 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
     public float health = 100;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] Slider slider;
+    
+    void FixedUpdate()
     {
-        
+        slider.value = Mathf.Lerp(slider.value, health, Time.deltaTime * 2f);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     void Die() 
     {
         if (health <= 0) 
         {
-
+            health = 0;
             Debug.Log("You Ded");
-                }
+        }
     }
 }

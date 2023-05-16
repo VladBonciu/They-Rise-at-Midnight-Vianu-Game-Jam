@@ -19,5 +19,12 @@ public class PickupPlant : MonoBehaviour
         inventory.UpdateText();
     }
 
+    public void PickedUpFiara(int index) 
+    {
+        //pickup the matraguna
+        Destroy(gameObject); 
+
+    }
+
   
 }

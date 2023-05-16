@@ -15,13 +15,13 @@ public class Satchel : MonoBehaviour
 
     void OnCollisionEnter(Collision col)
     {
-        if(col.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        Debug.Log("Hit");
+
+        if(col.gameObject.GetComponent<Enemy>())
         {
             Debug.Log("Hit Enemy");
-            col.gameObject.GetComponent<Enemy>().hit = true;
+            col.gameObject.GetComponent<Enemy>().GetHit();
         }
-
-        Debug.Log("Hit");
 
         Instantiate(explosion, transform.position, transform.rotation);
 
