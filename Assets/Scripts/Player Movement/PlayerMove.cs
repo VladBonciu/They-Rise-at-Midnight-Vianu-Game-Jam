@@ -34,7 +34,7 @@ public class PlayerMove : MonoBehaviour
     float horizontalInput;
     float verticalInput;
 
-    Vector3 moveDirection;
+    [HideInInspector]public Vector3 moveDirection;
 
     Rigidbody rb;
 
