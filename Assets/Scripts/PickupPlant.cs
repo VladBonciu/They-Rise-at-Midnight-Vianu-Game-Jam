@@ -5,10 +5,11 @@ using UnityEngine;
 public class PickupPlant : MonoBehaviour
 {
     public Inventory inventory;
-
+    public AudioSource pickup;
     void Awake()
     {
         inventory = FindObjectOfType<Inventory>();
+        
     }
     
     public void PickedUp() 
@@ -17,6 +18,7 @@ public class PickupPlant : MonoBehaviour
         Destroy(gameObject);
         inventory.matragunaCounter += 1;  
         inventory.UpdateText();
+        pickup.Play();
     }
 
     public void PickedUpFiara(int index) 

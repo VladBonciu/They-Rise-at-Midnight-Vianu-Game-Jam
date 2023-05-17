@@ -24,13 +24,15 @@ public class Enemy : MonoBehaviour
     [SerializeField] LayerMask maskPlayer;
 
     [SerializeField] Animator animator;
-
+    EnemyAudio enemyAudio;
     Rigidbody rb;
     
     void Start()
     {
         speedcop = speed;
         rb = GetComponent<Rigidbody>();
+        enemyAudio = GetComponent<EnemyAudio>();
+
     }
 
     // Update is called once per frame
@@ -46,6 +48,7 @@ public class Enemy : MonoBehaviour
         {
             aggresive = true;
             Aggresive();
+           
         }
         else
         {
@@ -59,7 +62,7 @@ public class Enemy : MonoBehaviour
 
         animator.SetTrigger("Floats");
         Debug.Log("Agressive");
-
+        enemyAudio.enemyAwake.Play();
         RaycastHit hit;
 
         Vector3 heading = player.transform.position - transform.position;
@@ -84,6 +87,7 @@ public class Enemy : MonoBehaviour
         isAttacking = true;
         player.GetComponent<Health>().health -= damage;
         Debug.Log("PlayerHit");
+        enemyAudio.enemyAttack.Play();
         player.GetComponent<Rigidbody>().AddForce(mesh.transform.forward * 10, ForceMode.Impulse);
         yield return new WaitForSeconds(attackTimer);
         isAttacking = false;
