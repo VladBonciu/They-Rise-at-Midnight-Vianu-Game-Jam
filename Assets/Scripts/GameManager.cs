@@ -16,11 +16,20 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool isUsingNotebook;
 
     [SerializeField] private TMP_Text[] matriceDeVizitare;
+    public int locationCount;
+
+    [SerializeField] private  PlayerLook playerLook;
+    [SerializeField] private  PlayerMove playerMove;
+    [SerializeField] private  Health HP;
+
+    [SerializeField] private GameObject InfoPanel;
+    [SerializeField] private GameObject WinPanel;
+    [SerializeField] private GameObject LosePanel;
 
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Confined;
         isToolkitOpen = false;
         Toolkit.SetActive(false);
         isUsingNotebook = false;
@@ -30,11 +39,30 @@ public class GameManager : MonoBehaviour
         {
             text.text = "o";
         }
+
+        locationCount = 0;
+
+        playerMove.canMove = false;
+        playerLook.mouseSensitivity = 0f;
+
+        InfoPanel.SetActive(true);
+        WinPanel.SetActive(false);
+        LosePanel.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(HP.health <= 0)
+        {
+            Lose();
+        }
+
+        if(locationCount == 5)
+        {
+            Win();
+        }
+
         if(Input.GetKeyDown(toggleToolkit) && !isUsingNotebook)
         {
             if(!isToolkitOpen)
@@ -94,20 +122,37 @@ public class GameManager : MonoBehaviour
     {
         matriceDeVizitare[index].text = "x";
 
-        int ok = 1;
-
-        for (int i = 0; i < 3; i++)
-        {
-            if(matriceDeVizitare[i].text != matriceDeVizitare[i].text && matriceDeVizitare[i].text != "x")
-            {
-                ok = 0;
-            }
-        }
-
-        if(ok == 1)
-        {
-            Debug.Log("You Win!!!");
-        }
+        locationCount = locationCount + 1;
+        
     }
-    
+
+    void Win()
+    {
+        WinPanel.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    void Lose()
+    {
+        LosePanel.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    public void StartGame()
+    {
+        InfoPanel.SetActive(false);
+        playerMove.canMove = true;
+        playerLook.mouseSensitivity = 100f;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void PlayAgain()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void GoToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
 }

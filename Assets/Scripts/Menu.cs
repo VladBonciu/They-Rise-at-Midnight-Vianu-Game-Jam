@@ -14,6 +14,7 @@ public class Menu : MonoBehaviour
     {
         ControlsPanel.SetActive(toggle.isOn);
         Cursor.lockState = CursorLockMode.Confined;
+        Time.timeScale = 1f;
     }
 
     public void Play()

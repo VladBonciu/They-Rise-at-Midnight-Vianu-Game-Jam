@@ -6,7 +6,7 @@ using Cinemachine;
 public class PlayerLook : MonoBehaviour
 {
     
-    [SerializeField] private float mouseSensitivity = 100f;
+    [SerializeField] public float mouseSensitivity = 100f;
     [SerializeField] private Transform Player;
     public Transform camTransform;
     float xRotation = 0f;  

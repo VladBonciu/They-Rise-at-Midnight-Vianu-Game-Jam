@@ -64,6 +64,22 @@ public class Crafting : MonoBehaviour
                 inventory.UpdateText();
             }
         }
+        else if(inventory.matragunaCounter == 0)
+        {
+            if (Input.GetKeyDown(KeyCode.E) && bandageTimer == bandageCop)
+            {
+                if(satchelTimer >=  (satchelCop - 0.2f))
+                {
+                    inventory.UseSatchel();
+                }
+                satchelImage.fillAmount = 1;
+                matragunaImage.fillAmount = 1;
+
+                satchelTimer = satchelCop;
+
+                inventory.UpdateText();
+            }
+        }
         else
         {
             if (Input.GetKeyUp(KeyCode.E) && bandageTimer == bandageCop)
@@ -113,6 +129,22 @@ public class Crafting : MonoBehaviour
                 bandageTimer = bandageCop;
 
                 matragunaImage.fillAmount = 1;
+
+                inventory.UpdateText();
+            }
+        }
+        else if(inventory.matragunaCounter == 0)
+        {
+            if (Input.GetKeyDown(KeyCode.Q) && satchelTimer == satchelCop)
+            {
+                if(bandageTimer >= (bandageCop - 0.2f))
+                {
+                    inventory.UseBandage();
+                }
+                bandageImage.fillAmount = 1;
+                matragunaImage.fillAmount = 1;
+
+                bandageTimer = bandageCop;
 
                 inventory.UpdateText();
             }

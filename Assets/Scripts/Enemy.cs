@@ -26,6 +26,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] Animator animator;
     EnemyAudio enemyAudio;
     Rigidbody rb;
+
+    bool hasBecomeAgressive;
     
     void Start()
     {
@@ -59,7 +61,11 @@ public class Enemy : MonoBehaviour
    
     void Aggresive() 
     {
-        enemyAudio.enemyAwake.Play();
+        if(!hasBecomeAgressive)
+        {
+            hasBecomeAgressive = true;
+            enemyAudio.enemyAwake.Play();
+        }
         animator.SetTrigger("Floats");
         Debug.Log("Agressive");
         

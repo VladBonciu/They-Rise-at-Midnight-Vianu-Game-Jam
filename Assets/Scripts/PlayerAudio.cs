@@ -21,7 +21,7 @@ public class PlayerAudio : MonoBehaviour
 
         if(playerMove.moveDirection != Vector3.zero)
         {
-            if(Input.GetKey(playerMove.sprintKey))
+            if(Input.GetKey(playerMove.sprintKey) && playerMove.staminaSlider.value > 5)
             {
                 stepSound.pitch = Mathf.Lerp(stepSound.pitch, 2, Time.deltaTime * 1f);
             }

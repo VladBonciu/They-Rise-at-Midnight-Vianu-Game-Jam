@@ -5,7 +5,8 @@ using UnityEngine;
 public class PickupPlant : MonoBehaviour
 {
     public Inventory inventory;
-    public AudioSource pickup;
+    public AudioClip pickupClip;
+
     void Awake()
     {
         inventory = FindObjectOfType<Inventory>();
@@ -15,17 +16,31 @@ public class PickupPlant : MonoBehaviour
     public void PickedUp() 
     {
         //pickup the matraguna
-        Destroy(gameObject);
+        
+        StartCoroutine(PickupWithSound());
+
+        
         inventory.matragunaCounter += 1;  
         inventory.UpdateText();
-        pickup.Play();
+        
     }
 
-    public void PickedUpFiara(int index) 
+    public void PickedUpFiara() 
     {
         //pickup the matraguna
         Destroy(gameObject); 
 
+    }
+
+    IEnumerator PickupWithSound()
+    {
+        AudioSource pickup = gameObject.AddComponent<AudioSource>();
+        pickup.spatialBlend = 0.5f;
+        pickup.clip = pickupClip;
+        pickup.Play();
+
+        yield return new WaitForSeconds(.3f);
+        Destroy(gameObject);
     }
 
   

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {       
@@ -16,6 +17,9 @@ public class PlayerMove : MonoBehaviour
     public float jumpCooldown;
     public float airMultiplier;
     bool readyToJump;
+
+    float stamina;
+    bool isCheckingStamina;
 
     [SerializeField] private float walkSpeed;
     [SerializeField] private float sprintSpeed;
@@ -41,8 +45,9 @@ public class PlayerMove : MonoBehaviour
     public bool canMove;
 
     public CinemachineVirtualCamera cinemachineVirtualCamera;
-    public CinemachineBasicMultiChannelPerlin a;
     PlayerAudio playerAudio;
+    public Slider staminaSlider;
+
 
     private void Start()
     {
@@ -52,6 +57,10 @@ public class PlayerMove : MonoBehaviour
        
         readyToJump = true;
         canMove = true;
+        isCheckingStamina = true;
+        stamina = 100f;
+
+        Mathf.Clamp(stamina, 0 ,100);
     }
 
     private void Update()
@@ -80,6 +89,8 @@ public class PlayerMove : MonoBehaviour
 
     private void MyInput()
     {
+        staminaSlider.value = Mathf.Lerp(staminaSlider.value, stamina, Time.deltaTime * 1f);;
+
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
@@ -99,13 +110,15 @@ public class PlayerMove : MonoBehaviour
         if(moveDirection != Vector3.zero)
         {
             playerAudio.stepSound.enabled = true;
-            if(Input.GetKey(sprintKey))
+            if(Input.GetKey(sprintKey) && stamina > 0 )
             {
                 moveSpeed = Mathf.Lerp(moveSpeed, sprintSpeed, Time.deltaTime * .2f);
+                stamina -= .2f;
             }
             else
             {
                 moveSpeed = Mathf.Lerp(moveSpeed, walkSpeed, Time.deltaTime * 1f);
+                stamina += 0.1f;
             }
        
             cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = moveSpeed / walkSpeed * moveSpeed / walkSpeed;
@@ -114,6 +127,7 @@ public class PlayerMove : MonoBehaviour
         {
             cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0.5f;
             StartCoroutine("makeAudioFalse");
+            stamina += 0.15f;
         }
 
         

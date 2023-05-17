@@ -32,7 +32,7 @@ public class Inventory : MonoBehaviour
 
     public void UseBandage()
     {
-        if(bandageCounter > 0)
+        if(bandageCounter > 0 && GetComponent<Health>().health < 100)
         {
             Debug.Log("Bandaged");
             bandageCounter--;

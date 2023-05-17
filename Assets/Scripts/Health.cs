@@ -5,8 +5,13 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    public float health = 100;
+    public float health = 100f;
     [SerializeField] Slider slider;
+
+    void Start()
+    {
+        health = 100f;
+    }
     
     void FixedUpdate()
     {
