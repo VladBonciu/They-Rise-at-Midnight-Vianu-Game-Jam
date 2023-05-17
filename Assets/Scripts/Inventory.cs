@@ -10,7 +10,7 @@ public class Inventory : MonoBehaviour
     public float bandageCounter = 0;
     public float satchelCounter = 0;
     [SerializeField] float heal = 10;
-
+    public PlayerAudio playeraudio;
     [SerializeField] TMP_Text matragunaText;
     [SerializeField] TMP_Text bandageText;
     [SerializeField] TMP_Text satchelText;
@@ -21,6 +21,7 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         UpdateText();
+        playeraudio = GetComponent<PlayerAudio>();
     }
 
 
@@ -37,6 +38,8 @@ public class Inventory : MonoBehaviour
             bandageCounter--;
             GetComponent<Health>().health += heal;
             UpdateText();
+            playeraudio.bandageSound.Play();
+           
         }
         
     }
@@ -48,8 +51,9 @@ public class Inventory : MonoBehaviour
             thrower.Shoot();
 
             Debug.Log("Satcheled");
-            satchelCounter--;
 
+            satchelCounter--;
+            playeraudio.satchelSound.Play();
 
             UpdateText();
         }

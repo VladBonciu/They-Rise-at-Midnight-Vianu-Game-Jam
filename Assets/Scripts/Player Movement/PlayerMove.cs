@@ -42,12 +42,14 @@ public class PlayerMove : MonoBehaviour
 
     public CinemachineVirtualCamera cinemachineVirtualCamera;
     public CinemachineBasicMultiChannelPerlin a;
+    PlayerAudio playerAudio;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-
+        playerAudio = GetComponent<PlayerAudio>();
+       
         readyToJump = true;
         canMove = true;
     }
@@ -96,6 +98,7 @@ public class PlayerMove : MonoBehaviour
 
         if(moveDirection != Vector3.zero)
         {
+            playerAudio.stepSound.enabled = true;
             if(Input.GetKey(sprintKey))
             {
                 moveSpeed = Mathf.Lerp(moveSpeed, sprintSpeed, Time.deltaTime * .2f);
@@ -104,12 +107,13 @@ public class PlayerMove : MonoBehaviour
             {
                 moveSpeed = Mathf.Lerp(moveSpeed, walkSpeed, Time.deltaTime * 1f);
             }
-
+       
             cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = moveSpeed / walkSpeed * moveSpeed / walkSpeed;
         }
         else
         {
             cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0.5f;
+            StartCoroutine("makeAudioFalse");
         }
 
         
@@ -119,9 +123,9 @@ public class PlayerMove : MonoBehaviour
     {
         // calculate movement direction
         moveDirection = transform.forward * verticalInput + orientation.right * horizontalInput;
-
+       
         // on ground
-        if(grounded)
+        if (grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
 
         // in air
@@ -164,6 +168,12 @@ public class PlayerMove : MonoBehaviour
     private void ResetJump()
     {
         readyToJump = true;
+    }
+    IEnumerator makeAudioFalse() 
+    {
+
+        yield return new WaitForSeconds(0.1f);
+        playerAudio.stepSound.enabled = false;
     }
 }
 
