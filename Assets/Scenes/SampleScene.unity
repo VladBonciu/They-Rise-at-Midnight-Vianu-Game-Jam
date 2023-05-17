@@ -3712,6 +3712,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1580cf449bcc7e94fafdfb487e718d1b, type: 3}
+--- !u!82 &458550084 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: -5839349854623694881, guid: 5d0d23b97fb14d549a2f2230af6062c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 908136642}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &466593641 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1580cf449bcc7e94fafdfb487e718d1b,
@@ -8010,6 +8016,11 @@ PrefabInstance:
       propertyPath: interactOptions.Array.data[0].unityEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 1537927926081449875, guid: 5d0d23b97fb14d549a2f2230af6062c8,
+        type: 3}
+      propertyPath: pickup
+      value: 
+      objectReference: {fileID: 458550084}
     - target: {fileID: 1843864082041656009, guid: 5d0d23b97fb14d549a2f2230af6062c8,
         type: 3}
       propertyPath: m_Name
@@ -9105,6 +9116,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffe97485d9f13da4982f754dc799b3c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyAwake: {fileID: 0}
+  enemyAttack: {fileID: 0}
 --- !u!82 &1041109967
 AudioSource:
   m_ObjectHideFlags: 0
@@ -15078,6 +15091,11 @@ PrefabInstance:
       propertyPath: interactOptions.Array.data[0].unityEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 1537927926081449875, guid: 5d0d23b97fb14d549a2f2230af6062c8,
+        type: 3}
+      propertyPath: pickup
+      value: 
+      objectReference: {fileID: 1957949776}
     - target: {fileID: 1843864082041656009, guid: 5d0d23b97fb14d549a2f2230af6062c8,
         type: 3}
       propertyPath: m_Name
@@ -16356,7 +16374,8 @@ AudioSource:
   m_GameObject: {fileID: 1797161624}
   m_Enabled: 0
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 123292d11f47d4548b78e608f140c5c1,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 3a26f6d90b2e95048946289564cdd2b0, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.395
@@ -17501,6 +17520,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1580cf449bcc7e94fafdfb487e718d1b,
     type: 3}
   m_PrefabInstance: {fileID: 1819343697}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1957949776 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: -5839349854623694881, guid: 5d0d23b97fb14d549a2f2230af6062c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1676727297}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1971771553
 PrefabInstance:
@@ -21877,6 +21902,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   orientation: {fileID: 7444755637248724740}
+  moveDirection: {x: 0, y: 0, z: 0}
   canMove: 0
   cinemachineVirtualCamera: {fileID: 7444755636722733600}
   a: {fileID: 0}
@@ -22100,6 +22126,7 @@ MonoBehaviour:
   bandageSound: {fileID: 7444755635892931509}
   satchelSound: {fileID: 7444755635892931512}
   stepSound: {fileID: 1797161627}
+  playerMove: {fileID: 7444755635892931497}
 --- !u!82 &7444755635892931511
 AudioSource:
   m_ObjectHideFlags: 0
