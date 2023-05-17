@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour
         {
             aggresive = true;
             Aggresive();
-           
+            
         }
         else
         {
@@ -59,10 +59,10 @@ public class Enemy : MonoBehaviour
    
     void Aggresive() 
     {
-
+        enemyAudio.enemyAwake.Play();
         animator.SetTrigger("Floats");
         Debug.Log("Agressive");
-        enemyAudio.enemyAwake.Play();
+        
         RaycastHit hit;
 
         Vector3 heading = player.transform.position - transform.position;
