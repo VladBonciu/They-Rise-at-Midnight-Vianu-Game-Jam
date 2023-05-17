@@ -69,8 +69,8 @@ public class Enemy : MonoBehaviour
 
         mesh.transform.LookAt(player.transform.position, Vector3.up);
 
-        // rb.AddForce(heading.normalized * speed, ForceMode.VelocityChange);
-        transform.position = Vector3.Lerp(transform.position,player.transform.position, Time.deltaTime * speed);
+        rb.MovePosition(Vector3.Lerp(transform.position ,transform.position + heading.normalized , speed * Time.deltaTime));
+        // transform.position = Vector3.Lerp(transform.position,player.transform.position, Time.deltaTime * speed);
 
         if(Physics.Raycast(transform.position, heading.normalized, out hit, 2f, maskPlayer) && !isAttacking)
         {

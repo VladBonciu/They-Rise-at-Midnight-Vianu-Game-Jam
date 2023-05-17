@@ -31,7 +31,7 @@ public class Crafting : MonoBehaviour
 
     void CraftSatchel() 
     {
-        if (inventory.matragunaCounter > 0 )
+        if (inventory.matragunaCounter > 1 )
         {
             if (Input.GetKey(KeyCode.E) && bandageTimer == bandageCop)
             {
