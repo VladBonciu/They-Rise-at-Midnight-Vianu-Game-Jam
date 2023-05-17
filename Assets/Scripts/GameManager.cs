@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1f;
+
         Cursor.lockState = CursorLockMode.Confined;
         isToolkitOpen = false;
         Toolkit.SetActive(false);
