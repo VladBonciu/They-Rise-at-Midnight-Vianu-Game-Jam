@@ -1,11 +1,6 @@
+## VianuGameJam - They Rise at Midnight
 
-
-
-
-
-# VianuGameJam - They Rise at Midnight
-
-## Description
+### Description
 
 Game Made in 72 hrs for the Vianu Game Jam!
 
@@ -15,10 +10,10 @@ Made in Unity version : 2021.3.24f1
 
 You can find a playable version of the game [here](https://vdlq.itch.io/they-rise-at-midnight).
 
-## Credits
+### Credits
 
 Made by [VdlQ](https://github.com/VladBonciu) & [Matei](https://github.com/rudeDoodle)
 
-## License
+### License
 
 This project is under the MIT License. This means you can use it as is however you'd like. Have fun! :D
